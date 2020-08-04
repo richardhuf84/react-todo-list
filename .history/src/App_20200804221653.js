@@ -6,6 +6,10 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import StyledWrapper from './components/StyledWrapper';
 import './App.css';
 
+const StyledWrapper = styled.div`
+
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
