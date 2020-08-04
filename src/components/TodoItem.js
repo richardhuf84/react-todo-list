@@ -24,7 +24,6 @@ class TodoItem extends React.Component {
   }
 
   handleOnChange(e) {
-    const val = e.target;
     this.props.updateTodo({
       id: this.state.todo.id,
       label: e.target.value,

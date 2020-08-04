@@ -3,10 +3,6 @@ import { Draggable } from 'react-beautiful-dnd';
 import TodoItem from './TodoItem';
 
 class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const todos = this.props.todos.map((todo, index) => {
       return (
