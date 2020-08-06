@@ -23,14 +23,13 @@ class TodoInput extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="todoInput">
-        <label for="todoInput" className="todo-input-label">
+        <label htmlFor="todoInput" className="todo-input-label">
           Add item
         </label>
         <input
           type="text"
           id="todoInput"
-          ref="todoInput"
-          autocomplete="off"
+          autoComplete="off"
           className="todo-input-add"
           value={this.state.value}
           onChange={this.handleUpdate}

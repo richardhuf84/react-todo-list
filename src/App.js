@@ -2,7 +2,6 @@ import React from 'react';
 import Title from './components/Title';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import StyledWrapper from './components/StyledWrapper';
 import './App.css';
 
@@ -94,21 +93,12 @@ class App extends React.Component {
           </legend>
           <fieldset>
             <TodoInput addTodo={this.addTodo} />
-            <DragDropContext onDragEnd={this.handleOnDragEnd}>
-              <Droppable droppableId="droppable-01">
-                {provided => (
-                  <TodoList
-                    innerRef={provided.innerRef}
-                    {...provided.droppableProps}
-                    todos={this.state.todos}
-                    removeTodo={this.removeTodo}
-                    updateTodo={this.updateTodo}
-                  >
-                    {provided.placeholder}
-                  </TodoList>
-                )}
-              </Droppable>
-            </DragDropContext>
+            <TodoList
+              todos={this.state.todos}
+              removeTodo={this.removeTodo}
+              updateTodo={this.updateTodo}
+            >
+            </TodoList>
           </fieldset>
         </form>
       </StyledWrapper>

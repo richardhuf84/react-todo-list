@@ -35,6 +35,7 @@ class TodoItem extends React.Component {
     const id = Date.now();
     const toggleId = `todo-toggle-${id}`;
     const contentId = `todo-content-${id}`;
+
     return (
       <li
         className={`todo-item ${
@@ -51,7 +52,7 @@ class TodoItem extends React.Component {
               className="todoItem-checkbox"
               id={toggleId}
             />
-            <label for={toggleId} className="is-sr-only">
+            <label htmlFor={toggleId} className="is-sr-only">
               {this.state.todo.label}
             </label>
           </div>
@@ -66,7 +67,7 @@ class TodoItem extends React.Component {
               onChange={this.handleOnChange}
               disabled={this.state.todo.completed}
             />
-            <label className="is-sr-only" for={contentId}>
+            <label className="is-sr-only" htmlFor={contentId}>
               Todo item
             </label>
             <PencilIcon />
