@@ -14,7 +14,15 @@ class TodoList extends React.Component {
       );
     });
 
-    return <ul className="todo-list">{todos}</ul>;
+    return <ul className="todo-list">
+      {todos && todos.length ? (
+        todos
+      ) : (
+          <li className="todo-placeholder">
+            You haven't added any todo's yet!
+          </li>
+        )}
+    </ul>;
   }
 }
 

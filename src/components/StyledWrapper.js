@@ -4,13 +4,14 @@ const StyledWrapper = Styled.div`
 
   --color-primary: hsl(217, 90%, 61%);
   --color-light: hsl(0, 0%, 100%);
-  --color-dark: hsl(217, 13%, 19%);
-  --color-dark-lightened: hsl(217, 13%, 24%);
+  --color-dark-100: hsl(217, 13%, 19%);
+  --color-dark-200: hsl(217, 13%, 24%);
+  --color-dark-300: hsl(217, 13%, 29%);
   --border-radii: 20px;
 
   
   font-family: "Nunito Sans", sans-serif;
-  background-color: var(--color-dark);
+  background-color: var(--color-dark-100);
   padding: 1rem;
   min-height: 100vh;
 
@@ -72,9 +73,10 @@ const StyledWrapper = Styled.div`
     display: flex;
     align-items: center;
     padding: 0 0.75rem 0 0;
+    transition: background-color 200ms ease;
 
     &:hover {
-      background-color: var(--color-dark-lightened);
+      background-color: var(--color-dark-200);
       transition: background-color 200ms ease;
 
       .edit-icon {
@@ -91,6 +93,12 @@ const StyledWrapper = Styled.div`
         }
       }
     }
+  }
+
+  .todo-placeholder {
+    font-size: 2rem;
+    color: var(--color-dark-300);
+    text-align: center;
   }
 
   .todo-item-content {
