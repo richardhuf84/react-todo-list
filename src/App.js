@@ -3,6 +3,7 @@ import Title from './components/Title';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 import StyledWrapper from './components/StyledWrapper';
+import { uuid } from 'uuidv4';
 import './App.css';
 
 class App extends React.Component {
@@ -13,7 +14,6 @@ class App extends React.Component {
     this.updateTodo = this.updateTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
 
     let todos;
 
@@ -30,7 +30,7 @@ class App extends React.Component {
 
   addTodo(todo) {
     this.setState((state) => {
-      const id = `todo-item-${Date.now()}`;
+      const id = uuid();
       const todos = state.todos.concat({
         id,
         completed: false,
@@ -82,17 +82,15 @@ class App extends React.Component {
     e.preventDefault();
   }
 
-  handleOnDragEnd() { }
-
   render() {
     return (
       <StyledWrapper>
+        <TodoInput addTodo={this.addTodo} />
         <form className="todo-form" onSubmit={this.handleSubmit}>
           <legend>
             <Title title="React Todo List" />
           </legend>
           <fieldset>
-            <TodoInput addTodo={this.addTodo} />
             <TodoList
               todos={this.state.todos}
               removeTodo={this.removeTodo}

@@ -22,7 +22,7 @@ class TodoInput extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="todoInput">
+      <form onSubmit={this.handleSubmit} className="todo-input">
         <label htmlFor="todoInput" className="todo-input-label">
           Add item
         </label>

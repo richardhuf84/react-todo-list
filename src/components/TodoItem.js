@@ -1,4 +1,5 @@
 import React from 'react';
+import { uuid } from 'uuidv4';
 import PencilIcon from './PencilIcon';
 
 class TodoItem extends React.Component {
@@ -32,9 +33,8 @@ class TodoItem extends React.Component {
   }
 
   render() {
-    const id = Date.now();
-    const toggleId = `todo-toggle-${id}`;
-    const contentId = `todo-content-${id}`;
+    const toggleId = uuid();
+    const contentId = uuid();
 
     return (
       <li

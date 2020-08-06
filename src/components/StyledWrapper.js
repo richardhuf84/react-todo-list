@@ -43,6 +43,14 @@ const StyledWrapper = Styled.div`
     padding: 1rem 0 0;
   }
 
+  .todo-input {
+    max-width: 500px;
+
+    @media screen and (min-width: 768px) {
+      max-width: 30vw;
+    }
+  }
+
   .todo-item {
     display: flex;
     align-items: center;
@@ -123,7 +131,7 @@ const StyledWrapper = Styled.div`
   }
 
   .todo-form {
-    max-width: 100vw;
+    max-width: 500px;
 
     @media screen and (min-width: 768px) {
       max-width: 30vw;
