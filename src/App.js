@@ -87,12 +87,12 @@ class App extends React.Component {
   render() {
     return (
       <StyledWrapper>
-        <TodoInput addTodo={this.addTodo} />
         <form className="todo-form" onSubmit={this.handleSubmit}>
           <legend>
             <Title title="React Todo List" />
           </legend>
           <fieldset>
+            <TodoInput addTodo={this.addTodo} />
             <TodoList
               todos={this.state.todos}
               removeTodo={this.removeTodo}
