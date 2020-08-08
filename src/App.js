@@ -2,6 +2,7 @@ import React from 'react';
 import Title from './components/Title';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
+import ThemeProvider from './Theme';
 import StyledWrapper from './components/StyledWrapper';
 import { v4 as uuid } from 'uuid';
 import './App.css';
@@ -86,22 +87,24 @@ class App extends React.Component {
 
   render() {
     return (
-      <StyledWrapper>
-        <form className="todo-form" onSubmit={this.handleSubmit}>
-          <legend>
-            <Title title="React Todo List" />
-          </legend>
-          <fieldset>
-            <TodoInput addTodo={this.addTodo} />
-            <TodoList
-              todos={this.state.todos}
-              removeTodo={this.removeTodo}
-              updateTodo={this.updateTodo}
-            >
-            </TodoList>
-          </fieldset>
-        </form>
-      </StyledWrapper>
+      <ThemeProvider>
+        <StyledWrapper>
+          <form className="todo-form" onSubmit={this.handleSubmit}>
+            <legend>
+              <Title title="React Todo List" />
+            </legend>
+            <fieldset>
+              <TodoInput addTodo={this.addTodo} />
+              <TodoList
+                todos={this.state.todos}
+                removeTodo={this.removeTodo}
+                updateTodo={this.updateTodo}
+              >
+              </TodoList>
+            </fieldset>
+          </form>
+        </StyledWrapper>
+      </ThemeProvider>
     );
   }
 }

@@ -1,10 +1,13 @@
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
-const StyledWrapper = Styled.div`
+const StyledWrapper = styled.div`
 
   --color-primary: hsl(217, 90%, 61%);
+  ${props => console.log('theme props', props)}
+  --color-primary: ${props => props.theme.dark.colors.primary};
+
   --color-light: hsl(0, 0%, 100%);
-  --color-dark-100: hsl(217, 13%, 19%);
+  --color-dark-100: ${props => props.theme.dark.colors.dark};
   --color-dark-200: hsl(217, 13%, 24%);
   --color-dark-300: hsl(217, 13%, 29%);
   --border-radii: 20px;
