@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
+import { useSpring, animated } from 'react-spring';
 import PencilIcon from './PencilIcon';
 
 class TodoItem extends React.Component {
@@ -43,9 +44,11 @@ class TodoItem extends React.Component {
   render() {
     const toggleId = uuid();
     const contentId = uuid();
+    const reactSpringProps = useSpring({ opacity: 1, from: { opacity: 0 } })
 
     return (
-      <li
+      <animated.li
+        style={reactSpringProps}
         className={`todo-item ${
           this.state.todo.completed ? "todo-item--completed" : ""
           }`}
@@ -88,7 +91,7 @@ class TodoItem extends React.Component {
         >
           Remove
         </button>
-      </li>
+      </animated.li>
     );
   }
 }
