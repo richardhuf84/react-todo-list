@@ -3,7 +3,7 @@ import Title from './components/Title';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 import StyledWrapper from './components/StyledWrapper';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import './App.css';
 
 class App extends React.Component {
@@ -64,9 +64,11 @@ class App extends React.Component {
   }
 
   removeTodo(id) {
+    console.log('id', id);
     this.setState(
       (state) => {
         const todos = state.todos.filter((todo) => todo.id !== id);
+        console.log(Date.now(), 'todos', todos);
         return {
           todos: todos
         };

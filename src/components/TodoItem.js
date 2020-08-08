@@ -1,5 +1,5 @@
 import React from 'react';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import PencilIcon from './PencilIcon';
 
 class TodoItem extends React.Component {
@@ -30,6 +30,14 @@ class TodoItem extends React.Component {
       label: e.target.value,
       completed: this.state.todo.completed
     });
+  }
+
+  componentDidUpdate() {
+    if (this.props.todo.id !== this.state.todo.id) {
+      this.setState({
+        todo: this.props.todo
+      });
+    }
   }
 
   render() {
