@@ -29,7 +29,7 @@ class App extends React.Component {
 
     this.state = {
       todos,
-      theme: 'dark'
+      theme: localStorage.getItem('theme') === null ? 'light' : localStorage.getItem('theme')
     };
   }
 
@@ -40,7 +40,7 @@ class App extends React.Component {
         ...state,
         theme: newTheme
       };
-
+      localStorage.setItem('theme', newTheme);
       return updatedState;
     });
   }
