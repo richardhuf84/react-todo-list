@@ -2,16 +2,31 @@ import Styled from 'styled-components';
 
 const StyledWrapper = Styled.div`
 
-  --color-primary: hsl(217, 90%, 61%);
-  --color-light: hsl(0, 0%, 100%);
-  --color-dark-100: hsl(217, 13%, 19%);
-  --color-dark-200: hsl(217, 13%, 24%);
+  // Color variables. Numbers align to lightness value, rounded up.
+
+  --color-primary-500: hsl(217, 90%, 51%);
+  --color-primary-600: hsl(217, 90%, 61%);
+
+  --color-dark-200: hsl(217, 13%, 19%);
+  --color-dark-250: hsl(217, 13%, 24%);
   --color-dark-300: hsl(217, 13%, 29%);
+
+  --color-light-000: hsl(0, 0%, 100%); // 000 = 100%. Needs reviewing :)
+
+  // Convenience variables for commonly used values
+  --color-primary: var(--color-primary-600);
+  --color-primary-dark: var(--color-primary-500);
+
+  --color-dark: var(--color-dark-200);
+
+  --color-light: var(--color-light-000);
+
+  // Misc variables
   --border-radii: 20px;
 
-  
+
   font-family: "Nunito Sans", sans-serif;
-  background-color: var(--color-dark-100);
+  background-color: var(--color-dark);
   padding: 1rem;
   min-height: 100vh;
 
@@ -83,8 +98,9 @@ const StyledWrapper = Styled.div`
     padding: 0 0.75rem 0 0;
     transition: background-color 200ms ease;
 
-    &:hover {
-      background-color: var(--color-dark-200);
+    &:hover,
+    &:active {
+      background-color: var(--color-dark-250);
       transition: background-color 200ms ease;
 
       .edit-icon {
@@ -126,7 +142,7 @@ const StyledWrapper = Styled.div`
     }
 
     &:focus {
-      outline: none;
+      outline: none; // we have a bg color change instead
     }
   }
 
@@ -163,6 +179,14 @@ const StyledWrapper = Styled.div`
     line-height: 2rem;
     color: var(--color-light);
     border-radius: var(--border-radii);
+    transition: background-color 200ms ease;
+
+    &:hover,
+    &:active {
+      background-color: var(--color-primary-dark);
+      text-decoration: underline;
+      transition: background-color 200ms ease;
+    }
   }
 
   [type="text"] {
