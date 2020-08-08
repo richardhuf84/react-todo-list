@@ -6,6 +6,7 @@ class TodoInput extends React.Component {
     this.state = { value: "" };
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.addTodo = this.addTodo.bind(this);
   }
 
   handleUpdate(event) {
@@ -14,6 +15,13 @@ class TodoInput extends React.Component {
 
   handleKeyUp(e) {
     if (e.keyCode === 13 && this.state.value.length) {
+      this.props.addTodo(this.state.value);
+      this.setState({ value: "" });
+    }
+  }
+
+  addTodo() {
+    if (this.state.value.length) {
       this.props.addTodo(this.state.value);
       this.setState({ value: "" });
     }
@@ -34,7 +42,7 @@ class TodoInput extends React.Component {
           onChange={this.handleUpdate}
           onKeyUp={this.handleKeyUp}
         />
-        <input type="submit" value="Add" />
+        <input type="button" onClick={this.addTodo} value="Add" />
       </div>
     );
   }
