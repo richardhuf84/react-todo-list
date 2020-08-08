@@ -1,25 +1,26 @@
-import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-const StyledWrapper = styled.div`
+export const GlobalStyles = createGlobalStyle`
 
-  --color-primary: hsl(217, 90%, 61%);
+  // Color variables. Numbers align to lightness value, rounded up.
+
   ${props => console.log('theme props', props)}
-  --color-primary: ${props => props.theme.dark.colors.primary};
 
-  --color-light: hsl(0, 0%, 100%);
-  --color-dark-100: ${props => props.theme.dark.colors.dark};
-  --color-dark-200: hsl(217, 13%, 24%);
-  --color-dark-300: hsl(217, 13%, 29%);
-  --border-radii: 20px;
+  :root {
+    /* Misc variables */
+    --border-radii: 20px;
+  }
 
-  
-  font-family: "Nunito Sans", sans-serif;
-  background-color: var(--color-dark-100);
-  padding: 1rem;
-  min-height: 100vh;
+  body {
+    font-family: "Nunito Sans", sans-serif;
+    background-color: ${props => props.theme.colors.background};
+    padding: 1rem;
+    min-height: 100vh;
+  }
 
   * {
     box-sizing: border-box;
+    transition: color 600ms ease, background-color 600ms ease;
   }
 
   .is-sr-only {
@@ -37,12 +38,12 @@ const StyledWrapper = styled.div`
   }
 
   h1 {
-    color: var(--color-primary);
+    color: ${props => props.theme.colors.primary};
     font-weight: 900;
   }
 
   .todo-list {
-    color: var(--color-light);
+    color: ${props => props.theme.colors.light};
     padding: 1rem 0 0;
   }
 
@@ -86,8 +87,9 @@ const StyledWrapper = styled.div`
     padding: 0 0.75rem 0 0;
     transition: background-color 200ms ease;
 
-    &:hover {
-      background-color: var(--color-dark-200);
+    &:hover,
+    &:active {
+      background-color: ${props => props.theme.mode === 'dark' ? props.theme.colors.dark200 : props.theme.colors.dark100};
       transition: background-color 200ms ease;
 
       .edit-icon {
@@ -106,9 +108,15 @@ const StyledWrapper = styled.div`
     }
   }
 
+  .pencil-icon {
+    color: ${props => props.theme.mode === 'light' ? props.theme.colors.light : props.theme.colors.dark};
+    fill: ${props => props.theme.mode === 'light' ? props.theme.colors.light : props.theme.colors.dark};
+  }
+
   .todo-placeholder {
     font-size: 2rem;
-    color: var(--color-dark-300);
+    color: ${props => props.theme.mode === 'light' ? props.theme.colors.light : props.theme.colors.dark};
+    opacity: .1;
     text-align: center;
   }
 
@@ -118,18 +126,19 @@ const StyledWrapper = styled.div`
 
   .todo-item-content-input {
     background: transparent;
-    color: var(--color-light);
+    color: ${props => props.theme.mode === 'light' ? props.theme.colors.light : props.theme.colors.dark};
     margin-left: 1rem;
     padding: 0.5rem 0.5rem 0.5rem 2rem;
     border: 0;
     font-size: 1.5rem;
 
     &::selection {
-      background-color: var(--color-primary);
+      background-color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.light}
     }
 
     &:focus {
-      outline: none;
+      outline: none; // we have a bg color change instead
     }
   }
 
@@ -147,7 +156,7 @@ const StyledWrapper = styled.div`
   }
 
   .todo-input-label {
-    color: var(--color-light);
+    color: ${props => props.theme.mode === 'light' ? props.theme.colors.light : props.theme.colors.dark};
     display: block;
   }
 
@@ -161,11 +170,19 @@ const StyledWrapper = styled.div`
   [type="button"],
   [type="submit"] {
     all: unset;
-    background-color: var(--color-primary);
+    background-color: ${props => props.theme.colors.primary};
     padding: 0 1rem;
     line-height: 2rem;
-    color: var(--color-light);
+    color: ${props => props.theme.colors.light};
     border-radius: var(--border-radii);
+    transition: background-color 200ms ease;
+
+    &:hover,
+    &:active {
+      background-color: ${props => props.theme.colors.primaryDark};
+      text-decoration: underline;
+      transition: background-color 200ms ease;
+    }
   }
 
   [type="text"] {
@@ -178,28 +195,24 @@ const StyledWrapper = styled.div`
     padding: 0;
   }
 
+  .todo-legend {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .todo-toggle-wrap {
+    display: flex;
+    align-items: center;
+  }
+
   .d-flex {
     display: flex;
   }
 
-  // Transition
-  .bounce-enter {
-    opacity: 0.01;
-  }
-
-  .bounce-enter.bounce-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
-  }
-
-  .bounce-leave {
-    opacity: 1;
-  }
-
-  .bounce-leave.example-leave-active {
-    opacity: 0.01;
-    transition: opacity 300ms ease-in;
-  }
+  ${'' /* .theme-toggler-button {
+    all: unset;
+    color: ${props => props.theme.mode === 'light' ? props.theme.colors.light : props.theme.colors.dark};
+  } */}
 `;
 
-export default StyledWrapper;
+export default GlobalStyles;

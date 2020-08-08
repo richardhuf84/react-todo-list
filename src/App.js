@@ -2,8 +2,9 @@ import React from 'react';
 import Title from './components/Title';
 import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
-import ThemeProvider from './Theme';
-import StyledWrapper from './components/StyledWrapper';
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./components/GlobalStyles";
+import { lightTheme, darkTheme } from "./components/Theme"
 import { v4 as uuid } from 'uuid';
 import './App.css';
 
@@ -15,6 +16,8 @@ class App extends React.Component {
     this.updateTodo = this.updateTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleTheme = this.toggleTheme.bind(this);
+    this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
 
     let todos;
 
@@ -25,8 +28,21 @@ class App extends React.Component {
     }
 
     this.state = {
-      todos
+      todos,
+      theme: 'dark'
     };
+  }
+
+  toggleTheme() {
+    this.setState((state) => {
+      const newTheme = state.theme === 'light' ? 'dark' : 'light';
+      const updatedState = {
+        ...state,
+        theme: newTheme
+      };
+
+      return updatedState;
+    });
   }
 
   addTodo(todo) {
@@ -69,7 +85,7 @@ class App extends React.Component {
     this.setState(
       (state) => {
         const todos = state.todos.filter((todo) => todo.id !== id);
-        console.log(Date.now(), 'todos', todos);
+
         return {
           todos: todos
         };
@@ -85,25 +101,31 @@ class App extends React.Component {
     e.preventDefault();
   }
 
+  capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
+
   render() {
     return (
-      <ThemeProvider>
-        <StyledWrapper>
-          <form className="todo-form" onSubmit={this.handleSubmit}>
-            <legend>
-              <Title title="React Todo List" />
-            </legend>
-            <fieldset>
-              <TodoInput addTodo={this.addTodo} />
-              <TodoList
-                todos={this.state.todos}
-                removeTodo={this.removeTodo}
-                updateTodo={this.updateTodo}
-              >
-              </TodoList>
-            </fieldset>
-          </form>
-        </StyledWrapper>
+      <ThemeProvider theme={this.state.theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <form className="todo-form" onSubmit={this.handleSubmit}>
+          <legend className="todo-legend">
+            <Title title="React Todo List" />
+            <div className="todo-toggle-wrap">
+              <button type="button" className="theme-toggler-button" onClick={this.toggleTheme}>{this.capitalizeFirstLetter(this.state.theme)} mode</button>
+            </div>
+          </legend>
+          <fieldset>
+            <TodoInput addTodo={this.addTodo} />
+            <TodoList
+              todos={this.state.todos}
+              removeTodo={this.removeTodo}
+              updateTodo={this.updateTodo}
+            >
+            </TodoList>
+          </fieldset>
+        </form>
       </ThemeProvider>
     );
   }
